@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
+    'graphene_django',
     'myDiary_API.apps.authentication',
     'myDiary_API.apps.diary',
     'myDiary_API.apps.entry',
@@ -73,16 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myDiary_API.wsgi.application'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-}
+AUTH_USER_MODEL = 'authentication.User'
 
-# Database
+# Database Config
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
@@ -135,3 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+GRAPHENE = {
+    'SCHEMA': 'myDiary_API.schema.schema'
+}
+
