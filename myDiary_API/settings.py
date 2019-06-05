@@ -73,14 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myDiary_API.wsgi.application'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-}
+AUTH_USER_MODEL = 'authentication.User'
 
 # Database Config
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

@@ -35,6 +35,8 @@ class User(AbstractBaseUser):
     username = models.CharField(db_index=True, max_length=255, unique=True)
     email = models.EmailField(db_index=True, unique=True)
     fname = models.CharField(blank=False, max_length=255)
+    lname = models.CharField(blank=False, max_length=255)
+    password = models.CharField(blank=False, max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
