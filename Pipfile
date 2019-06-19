@@ -12,6 +12,7 @@ graphene = "*"
 graphene-django = "*"
 django-filter = "*"
 django-graphql-jwt = "*"
+coveralls = "*"
 
 [requires]
 python_version = "3.6.5"
