@@ -1,18 +1,29 @@
 language: python
 python:
-  - "3.6"
+- '3.6'
 services:
-  - postgresql
+- postgresql
 addons:
-  postgresql: "9.6"
+  postgresql: '9.6'
+  code_climate:
+    repo_token:
+      secure: "GfzQl6+/PDl59jqpUzUZt5p/ie+9T7XnBRibqMqJnQ1gjl/97RE/6CqsYDBxcV+3e3ynKepAlS+jk+AiCyLDZ9x2Ra6QpDywRsfNiuKPddlBeHeliQ9hg1MBL0jny44tuWl2ds0UKbrDtikgLMAS5sk3PBn7cKj675QUVtshtHxuxkHE9bS6lhBz+GAwzR9anfGktiI9VdE2gGbcPt86thhsYYE4lRBXQfwX4GE3r6H4GpLbAfHCxB/ywfvEcwsv1W3Mtkk+a7sssn1E6PEUWjThjhC5/tMAZ+UyOCcUBwG5Khg4tKO/uWG+yPrEWkehRSFDBJU0gbkkpbxXPxC/16tkRDdp/2seI9I4bgaWYiotcP6efe2pMC2wDKY/OgWDpjKB3ib9NOaclAfuRMSR2rcmucwLI7vJRlnRizgZe07YLwJ5fchHBVrz8b8hoKAkBCsDC/m+dzng2UwlCyCFUDB0e4qeqtt/WXi2HL3uGBJQKy+J0Vquja58qIZQTOZN8r1F5fTXF5X6oZbTmkO1KlXDsImm7c39N4LAFFKTgEFL9LXnU64y3u80qmL19S36hsFcW7UwoDEf8Y8FHD4VX4JAXAhoadew5fOhWv0gGglzD7LpPXbFHd3mVwM29lW34AEqWo5zFdLRf/s4CSXJPKuCy8ImSt7SlbG6mIm5RRE="
+
 install:
   - pip install pipenv
   - pip install mixer
-  - pipenv install --skip-lock 
+  - pip install codeclimate-test-reporter
+  - pipenv install --skip-lock
+
 before_script:
   - psql -c 'create database myDiary_test;' -U postgres
   - python manage.py migrate
+  
 script:
   - coverage run --source='myDiary_API' manage.py test && coverage report
+
 after_success:
   - coveralls
+env:
+  global:
+    secure: GfzQl6+/PDl59jqpUzUZt5p/ie+9T7XnBRibqMqJnQ1gjl/97RE/6CqsYDBxcV+3e3ynKepAlS+jk+AiCyLDZ9x2Ra6QpDywRsfNiuKPddlBeHeliQ9hg1MBL0jny44tuWl2ds0UKbrDtikgLMAS5sk3PBn7cKj675QUVtshtHxuxkHE9bS6lhBz+GAwzR9anfGktiI9VdE2gGbcPt86thhsYYE4lRBXQfwX4GE3r6H4GpLbAfHCxB/ywfvEcwsv1W3Mtkk+a7sssn1E6PEUWjThjhC5/tMAZ+UyOCcUBwG5Khg4tKO/uWG+yPrEWkehRSFDBJU0gbkkpbxXPxC/16tkRDdp/2seI9I4bgaWYiotcP6efe2pMC2wDKY/OgWDpjKB3ib9NOaclAfuRMSR2rcmucwLI7vJRlnRizgZe07YLwJ5fchHBVrz8b8hoKAkBCsDC/m+dzng2UwlCyCFUDB0e4qeqtt/WXi2HL3uGBJQKy+J0Vquja58qIZQTOZN8r1F5fTXF5X6oZbTmkO1KlXDsImm7c39N4LAFFKTgEFL9LXnU64y3u80qmL19S36hsFcW7UwoDEf8Y8FHD4VX4JAXAhoadew5fOhWv0gGglzD7LpPXbFHd3mVwM29lW34AEqWo5zFdLRf/s4CSXJPKuCy8ImSt7SlbG6mIm5RRE=
