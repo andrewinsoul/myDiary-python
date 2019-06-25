@@ -7,6 +7,7 @@ addons:
   postgresql: "9.6"
 install:
   - pip install pipenv
+  - pip install mixer
   - pipenv install --skip-lock 
 before_script:
   - psql -c 'create database myDiary_test;' -U postgres
