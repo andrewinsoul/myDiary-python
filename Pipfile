@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 mixer = "*"
+codeclimate-test-reporter = "*"
 
 [packages]
 django = "*"

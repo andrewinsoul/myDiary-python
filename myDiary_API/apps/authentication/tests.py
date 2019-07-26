@@ -64,8 +64,8 @@ class UserTestCase(BaseSetup, GraphQLTestCase):
                 }
             }
             ''',
-            op_name = 'add user',
-            input_data = {
+            op_name='add user',
+            input_data={
                 "user": {
                     'username': 'username1',
                     'email': 'andrewinsoul@gmail.com',
