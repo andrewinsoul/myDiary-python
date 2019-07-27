@@ -8,6 +8,7 @@ mutations = (
 )
 queries = (
     user_schema.Query,
+    diary_schema.Query
 )
 class Mutation(*mutations, graphene.ObjectType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()

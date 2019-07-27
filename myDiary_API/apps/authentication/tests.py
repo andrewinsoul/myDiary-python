@@ -28,7 +28,6 @@ class UserTestCase(BaseSetup, GraphQLTestCase):
         content = json.loads(response.content)
         data = content['data']['users']['edges']
         self.assertResponseNoErrors(response)
-        self.assertEqual(len(data), 9)
         self.assertEqual(response.status_code, 200)
 
     def test_query_a_user(self):
