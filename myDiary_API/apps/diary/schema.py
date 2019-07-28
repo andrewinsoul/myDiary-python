@@ -6,10 +6,17 @@ from graphene_django import DjangoObjectType
 from graphql import GraphQLError
 from graphql_jwt.decorators import login_required
 
+class DiaryType(DjangoObjectType):
+    class Meta:
+        model = Diary
+
 class DiaryNode(DjangoObjectType):
     class Meta:
         model = Diary
-        filter_fields = ['is_private', 'user__id']
+        filter_fields = {
+            'name': ['exact', 'icontains'],
+            'description': ['exact', 'icontains']
+        }
         interfaces = (relay.Node, )
 
 class DiaryInput(graphene.InputObjectType):
@@ -36,3 +43,28 @@ class CreateDiary(relay.ClientIDMutation):
 class Mutation(graphene.ObjectType):
     create_diary = CreateDiary.Field()
 
+class Query(graphene.ObjectType):
+    diary = graphene.Field(DiaryType, id=graphene.Int())
+    public_diaries = DjangoFilterConnectionField(DiaryNode)
+    my_diaries = DjangoFilterConnectionField(DiaryNode)
+
+    def resolve_diary(root, info, **kwargs):
+        try:
+            user = info.context.user
+            diary = Diary.objects.filter(id=kwargs.get('id')).first()
+            if not diary:
+                return GraphQLError('Diary not found')
+            if diary.is_private:
+                return diary if diary.user == user\
+                    else GraphQLError('Access Denied, cannot view diary')
+            return diary
+        except GraphQLError as error:
+            return error
+
+    def resolve_public_diaries(root, info, **kwargs):
+        return Diary.objects.filter(is_private=False)
+
+    @login_required
+    def resolve_my_diaries(root, info, **kwargs):
+        user = info.context.user
+        return Diary.objects.filter(user=user)
