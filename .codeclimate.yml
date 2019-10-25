@@ -4,3 +4,4 @@ plugins:
 exclude_patterns:
 - "migrations/"
 - "tests/"
+- "settings/"

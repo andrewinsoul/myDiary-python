@@ -22,27 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'TEST KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'graphene_django',
-    'myDiary_API.apps.authentication',
-    'myDiary_API.apps.diary',
-    'myDiary_API.apps.entry',
-]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -74,31 +53,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'myDiary_API.wsgi.application'
 
 AUTH_USER_MODEL = 'authentication.User'
-
-# Database Config
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'PORT': os.getenv('DB_PORT'),
-        'HOST': os.getenv('DB_HOST'),
-        'TEST': {
-            'CHARSET': None,
-            'COLLATION': None,
-            'NAME': 'test.db',
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': 'postgres',
-            'PORT': 5432,
-            'USER': 'postgres',
-            'MIRROR': None
-        }
-
-    }
-}
 
 
 # Password validation
@@ -150,4 +104,3 @@ GRAPHENE = {
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],
 }
-
