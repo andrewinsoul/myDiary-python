@@ -6,15 +6,17 @@ verify_ssl = true
 [dev-packages]
 mixer = "*"
 codeclimate-test-reporter = "*"
+coveralls = "==1.8.2"
 
 [packages]
-django = "*"
+django = "==2.2.6"
 psycopg2 = "==2.7.7"
-graphene = "*"
-graphene-django = "*"
-django-filter = "*"
-django-graphql-jwt = "*"
-coveralls = "*"
+graphene = "==2.1.8"
+graphene-django = "==2.6.0"
+django-filter = "==2.2.0"
+django-graphql-jwt = "==0.2.2"
+gunicorn = "==19.9.0"
+dj-database-url = "==0.5.0"
 
 [requires]
 python_version = "3.7.4"

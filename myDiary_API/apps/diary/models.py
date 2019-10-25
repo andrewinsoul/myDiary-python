@@ -12,5 +12,6 @@ class Diary(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+        unique_together = ('name', 'description')
     def __str__(self):
         return self.name
