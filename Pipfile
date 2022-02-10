@@ -9,7 +9,7 @@ codeclimate-test-reporter = "*"
 coveralls = "==1.8.2"
 
 [packages]
-django = "==2.2.6"
+django = "==2.2.27"
 psycopg2 = "==2.7.7"
 graphene = "==2.1.8"
 django-filter = "==2.2.0"
